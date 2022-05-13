@@ -38,14 +38,11 @@ end
 
 local CharacterModule = GetModule("Character")
 
-local Library = CharacterModule.Library
-
-
 if not CharacterModule then
 	warn("Something has gone wrong")
 	return {}
 end
-
+local Library = CharacterModule.Library
 
 
 --
