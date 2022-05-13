@@ -11,13 +11,8 @@ local Camera = workspace.Camera
 
 -- Settings
 local GitHubUserlink = "https://raw.githubusercontent.com/madrwr/rorilla-v2/main/"
-local HighLevelAccess = false
-
-local AutoRun = false
-local BodyVelocity = {-17.5, 0, -17.5}
-local HatVelocity = {-17.5, 0, -17.5}
-
-local HeadScale = 1.5
+Settings.HighLevelAccess = false
+Settings.HeadScale = 1.5
 
 
 
@@ -30,7 +25,7 @@ local HeadScale = 1.5
 
 -- Module prepare
 function GetModule(module)
-	if HighLevelAccess then
+	if Settings.HighLevelAccess then
 		local Success, Returned = pcall(function() -- // HttpsGetAsync is a hidden function that is unlocked by the executor, wrapped incase of 
 			return loadstring(game:HttpGetAsync(GitHubUserlink .. module .. ".lua"))()
 		end)
@@ -48,7 +43,7 @@ local Library = CharacterModule.Library
 
 if not CharacterModule then
 	warn("Something has gone wrong")
-	return function(...)end
+	return {}
 end
 
 
@@ -189,7 +184,7 @@ function Start()
 
 		Camera.CameraSubject = nil
 		Camera.CameraType = Enum.CameraType.Scriptable
-		Camera.HeadScale = HeadScale
+		Camera.HeadScale = Settings.HeadScale
 		
 		--
 		local RshoulderCFrame = torso.CFrame * RSHOULDER_C0_CACHE
@@ -207,8 +202,8 @@ function Start()
 		LHA.WorldCFrame = lhand.CFrame
 		
 		
-		local _CFrame = CFrame.new((Character.HumanoidRootPart.Position - UserCFrame.Position * HeadScale) + Vector3.new(0,1.5,0)) * Turn;
-		Camera.CFrame = (_CFrame * CFrame.fromEulerAnglesXYZ(CFrame.new(UserCFrame.p * HeadScale):ToEulerAnglesXYZ()))
+		local _CFrame = CFrame.new((Character.HumanoidRootPart.Position - UserCFrame.Position * Settings.HeadScale) + Vector3.new(0,1.5,0)) * Turn;
+		Camera.CFrame = (_CFrame * CFrame.fromEulerAnglesXYZ(CFrame.new(UserCFrame.p * Settings.HeadScale):ToEulerAnglesXYZ()))
 		
 		
 		
@@ -254,7 +249,7 @@ function Start()
 	
 
 	--
-	if HighLevelAccess then
+	if Settings.HighLevelAccess then
 		settings().Physics.AllowSleep = false 
 		settings().Physics.PhysicsEnvironmentalThrottle = Enum.EnviromentalPhysicsThrottle.Disabled
 		
@@ -267,22 +262,4 @@ function Start()
 end
 
 
-return function(Data)
-	if Data.HighLevelAccess then
-		HighLevelAccess = Data.HighLevelAccess
-	end
-	
-	if Data.AutoRun then
-		AutoRun = Data.AutoRun
-	end
-	
-	if Data.BodyVelocity then
-		BodyVelocity = Data.BodyVelocity
-	end
-	
-	if Data.HatVelocity then
-		HatVelocity = Data.HatVelocity
-	end
-	
-	Start()
-end
+Start()
