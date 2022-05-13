@@ -11,7 +11,9 @@ local Camera = workspace.Camera
 
 -- Settings
 local GitHubUserlink = "https://raw.githubusercontent.com/madrwr/rorilla-v2/main/"
-
+local Settings = {}
+Settings.HighLevelAccess = true -- enable when using executor
+Settings.HeadScale = 1.5
 
 
 
