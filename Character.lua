@@ -110,7 +110,7 @@ function CharacterModule.CreateVRObjects(Character, rhand, lhand)
 end
 
 
-Character.Library = {
+CharacterModule.Library = {
 	NoCollide = function(a, b)
 		local NoCollision = Instance.new("NoCollisionConstraint")
 		NoCollision.Part0 = a
